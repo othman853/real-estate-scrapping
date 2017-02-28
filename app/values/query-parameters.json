@@ -1,0 +1,32 @@
+{
+  "value": {
+    "from": 700,
+    "to": 1500
+  },
+
+  "size": {
+    "from": 35,
+    "to": 200
+  },
+
+  "numberOfBedrooms": [1,2],
+  "numberOfGarageSpaces": [0,1],
+
+  "neighborhoods": [
+    "Auxiliadora",
+    "Bela Vista",
+    "Boa Vista",
+    "Bom Fim",
+    "Chácara das Pedras",
+    "Floresta",
+    "Higienópolis",
+    "Jardim Botânico",
+    "Jardim Europa",
+    "Moinhos De Vento",
+    "Mont'Serrat",
+    "Passo D'Areia",
+    "Petrópolis",
+    "Rio Branco",
+    "Protásio Alves"
+  ]
+}
