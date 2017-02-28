@@ -1,7 +1,3 @@
-const got = require('got');
-const cheerio = require('cheerio');
-const entities = require('entities');
-
 const domStuff =
   $ => ({
     first: select => $(select).first(),
@@ -9,13 +5,8 @@ const domStuff =
     substr: text => (begin=0, end) => text.trim().substring(begin, end)
   });
 
-got('https://www.creditoreal.com.br/alugueis/1399/apartamento-com-2-dormitorios-no-bairro-petropolis-em-porto-alegre')
-// got('https://www.creditoreal.com.br/alugueis/66061/apartamento-com-1-dormitorio-no-bairro-floresta-em-porto-alegre')
-// got('https://www.creditoreal.com.br/alugueis/62124/apartamento-com-2-dormitorios-no-bairro-floresta-em-porto-alegre')
-  .then(res => {
-
-    const $ = cheerio.load(res.body);
-
+module.exports =
+  $ => {
     const { first, html, substr } = domStuff($);
 
     const placeInfo = {
@@ -29,6 +20,5 @@ got('https://www.creditoreal.com.br/alugueis/1399/apartamento-com-2-dormitorios-
       phone: $('.property-detail__contact').find('strong').html()
     };
 
-    console.log(placeInfo);
-
-  });
+    return placeInfo;
+  };
