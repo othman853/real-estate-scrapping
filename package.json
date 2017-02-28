@@ -1,0 +1,13 @@
+{
+  "name": "real-estate-scrapping",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/othman853/real-estate-scrapping.git",
+  "author": "othman853 <anuar.yasser@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "entities": "^1.1.1",
+    "got": "^6.7.1"
+  }
+}
