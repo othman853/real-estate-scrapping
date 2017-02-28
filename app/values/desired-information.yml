@@ -1,0 +1,17 @@
+place:
+  - price
+  - area
+  - bedrooms
+  - bathrooms
+  - garage
+  - condominio
+  - iptu
+  - contact
+  - address
+  - images
+  - origin_id
+  - hasElevator
+  - floor
+  - sun_position
+  - description
+  - origin_link
