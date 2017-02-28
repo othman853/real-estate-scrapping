@@ -1,19 +1,26 @@
-const domStuff = $ => ({
-  iDataTest: select => $(`.i-${select}`).first().attr('data-test'),
-  spanItemProp: itemProp => $(`span[itemprop='${itemProp}']`).first().html()
+const domHelpers = require('./dom');
+
+const domHelpersExtended = ({ attr, first, html, byProp }) => ({
+  iDataTest: select => attr(first(`.i-${select}`))('data-test'),
+  spanItemProp: itemProp => html(first(byProp('span', 'itemprop', itemProp)))
 });
 
 module.exports =
   $ => {
-
-    const dom = domStuff($);
+    const { all, allMapped, find, html, toAttr, existing, nth } = dom = domHelpers($);
+    const { iDataTest, spanItemProp } = domHelpersExtended(dom);
 
     const images = (
-      $('img.my-prod-image').map( (_, img) => $(img).attr('src') ).toArray()
+      allMapped('img.my-prod-image')
+        .map(toAttr('src'))
+        .filter(existing)
     );
 
     const additionalInfo = (
-      $('.my-list.lista-caracteristica > li').map( (_, li) => $(li).find('span').eq(1).html()).toArray()
+      allMapped('.my-list.lista-caracteristica > li')
+        .map(find('span'))
+        .map(nth(1))
+        .map(html)
     );
 
     const address = (
@@ -28,14 +35,14 @@ module.exports =
     );
 
     const placeInfo = {
-      price: dom.spanItemProp('price'),
-      area: dom.iDataTest('area'),
-      bedrooms: dom.iDataTest('quarto'),
-      suites: dom.iDataTest('suite'),
-      bathrooms: dom.iDataTest('banheiro'),
-      garage: dom.iDataTest('vagas'),
+      price: spanItemProp('price'),
+      area: iDataTest('area'),
+      bedrooms: iDataTest('quarto'),
+      suites: iDataTest('suite'),
+      bathrooms: iDataTest('banheiro'),
+      garage: iDataTest('vagas'),
       condominio: $('.i-imovel').eq(1).attr('data-test'),
-      codigo: dom.spanItemProp('mpn'),
+      codigo: spanItemProp('mpn'),
       address,
       images,
       additionalInfo

@@ -13,7 +13,6 @@ const data =
       }))
       .map( p => p.targets.map(p.fetch));
 
-
 Promise.all(
   data().reduce( (all, p) => all.concat(p), [])
 ).then(console.log);
