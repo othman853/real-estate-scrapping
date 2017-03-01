@@ -1,0 +1,17 @@
+COMPOSE=docker-compose -f infrastructure/docker/compose/dev.yml
+
+web:
+	$(COMPOSE) up web
+
+db:
+	$(COMPOSE) up -d db
+	@make ps
+
+down:
+	$(COMPOSE) down
+
+ps:
+	$(COMPOSE) ps
+
+db-console:db
+	docker exec -it $(shell docker ps -q --filter name=restates_database) mongo restates

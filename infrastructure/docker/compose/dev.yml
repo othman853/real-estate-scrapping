@@ -1,0 +1,23 @@
+version: "2"
+
+services:
+  web:
+    build:
+      dockerfile: infrastructure/docker/images/web.dev.docker
+      context: ../../../
+    volumes:
+      - ../../../:/usr/app
+      - /usr/app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - RESTATES_MONGO_URL=mongodb://db/restates
+    links:
+      - db
+    command: [npm, start]
+    container_name: restates_web
+  db:
+    build:
+      dockerfile: infrastructure/docker/images/mongo.dev.docker
+      context: ../../../
+    container_name: restates_database
