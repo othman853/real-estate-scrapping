@@ -1,11 +1,20 @@
+DB_SERVICE=restates_db
+WEB_SERVICE=restates_web
+
 COMPOSE=docker-compose -f infrastructure/docker/compose/dev.yml
 
 web:
-	$(COMPOSE) up web
+	$(COMPOSE) up -d $(WEB_SERVICE)
 
 db:
-	$(COMPOSE) up -d db
+	$(COMPOSE) up -d $(DB_SERVICE)
 	@make ps
+
+log-web:
+	$(COMPOSE) logs $(WEB_SERVICE)
+
+log-db:
+	$(COMPOSE) logs $(DB_SERVICE)
 
 down:
 	$(COMPOSE) down
@@ -14,4 +23,4 @@ ps:
 	$(COMPOSE) ps
 
 db-console:db
-	docker exec -it $(shell docker ps -q --filter name=restates_database) mongo restates
+	$(COMPOSE) exec $(DB_SERVICE) mongo restates
